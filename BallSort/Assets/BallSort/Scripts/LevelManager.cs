@@ -11,7 +11,7 @@ public class LevelManager : MonoBehaviour
     public static LevelManager Instance { get; private set; }
 
     private const int BallsPerTube = 4;
-    private const int EmptyTubeCount = 2;
+    private const int EmptyTubeCount = 3;
 
     private const string CurrentLevelKey = "BallSort_CurrentLevel";
     private const string SoundKey = "BallSort_Sound";
