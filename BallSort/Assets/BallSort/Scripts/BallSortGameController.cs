@@ -83,25 +83,28 @@ public class BallSortGameController : MonoBehaviour
         out Vector2 screenPosition,
         out int pointerId)
     {
-#if UNITY_EDITOR || UNITY_STANDALONE
-        if (Input.GetMouseButtonDown(0))
+#if UNITY_EDITOR || UNITY_STANDALONE || UNITY_WEBGL
+        // Left mouse click OR right mouse click.
+        if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
         {
             screenPosition = Input.mousePosition;
             pointerId = -1;
             return true;
         }
-#else
-        if (Input.touchCount > 0)
-        {
-            Touch touch = Input.GetTouch(0);
+#endif
 
-            if (touch.phase == TouchPhase.Began)
-            {
-                screenPosition = touch.position;
-                pointerId = touch.fingerId;
-                return true;
-            }
+#if UNITY_ANDROID || UNITY_IOS
+    if (Input.touchCount > 0)
+    {
+        Touch touch = Input.GetTouch(0);
+
+        if (touch.phase == TouchPhase.Began)
+        {
+            screenPosition = touch.position;
+            pointerId = touch.fingerId;
+            return true;
         }
+    }
 #endif
 
         screenPosition = default;
